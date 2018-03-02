@@ -14,5 +14,7 @@
   <run_depend>turtlebot3_description</run_depend>
   <run_depend>zed_wrapper</run_depend>
   <run_depend>rtabmap_ros</run_depend>
+  <run_depend>tb3jp_description</run_depend>
+  <run_depend>tb3jp_bringup</run_depend>
   <export><metapackage/></export>
 </package>
