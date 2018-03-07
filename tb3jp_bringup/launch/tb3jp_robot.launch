@@ -1,0 +1,25 @@
+<launch>
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [vegan]"/>
+  <arg name="use_gui" default="false"/>
+  <arg name="rviz" default="false"/>
+
+  <!-- OpenCR -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_core.launch"/>
+
+  <!-- Lidar -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_lidar.launch"/>
+
+  <!-- Robot Model -->
+  <include file="$(find tb3jp_bringup)/launch/tb3jp_model.launch">
+    <arg name="model" value="$(arg model)"/>
+    <arg name="use_gui" value="$(arg use_gui)"/>
+    <arg name="rviz" value="$(arg rviz)" />
+  </include>
+
+  <!-- ZED -->
+  <include file="$(find tb3jp_bringup)/launch/tb3jp_zed.launch"/>
+
+  <!-- diagnostics -->
+  <node pkg="turtlebot3_bringup" type="turtlebot3_diagnostics" name="turtlebot3_diagnostics" output="screen" />
+
+</launch>

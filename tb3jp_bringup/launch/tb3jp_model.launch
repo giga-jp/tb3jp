@@ -1,12 +1,14 @@
 <launch>
   <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [vegan]"/>
+  <arg name="use_gui" default="false"/>
+  <arg name="rviz" default="false"/>
 
   <include file="$(find tb3jp_bringup)/launch/includes/description.launch.xml">
     <arg name="model" value="$(arg model)" />
   </include>
 
   <node name="robotis_joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-    <param name="use_gui" value="true"/>
+    <param name="use_gui" value="$(arg use_gui)"/>
     <param name="rate" value="50"/>
   </node>
 
@@ -14,5 +16,6 @@
     <param name="publish_frequency" type="double" value="50.0" />
   </node>
 
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find tb3jp_description)/rviz/model.rviz"/>
+  <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz"
+        args="-d $(find tb3jp_description)/rviz/model.rviz"/>
 </launch>
