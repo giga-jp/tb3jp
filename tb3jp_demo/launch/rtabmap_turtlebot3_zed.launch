@@ -1,0 +1,23 @@
+<!-- zed_rtabmap.launch -->
+<launch>
+  <arg name="rviz" default="true" />
+  <arg name="rtabmapviz" default="false" />
+  <arg name="stereo_namespace"        default="camera"/>
+
+  <!-- <node name="camera_to_zed_frame" -->
+  <!-- pkg="tf" type="static_transform_publisher" -->
+  <!-- args="0 0 0 -1.5707963267948966 0 -1.5707963267948966 camera_link zed_initial_frame 100" /> -->
+
+  <include file="$(find rtabmap_ros)/launch/stereo_mapping.launch">
+    <arg name="rtabmap_args" value="--delete_db_on_start" />
+    <!-- <arg name="depth_registered_topic" value="/camera/depth/image_rect_color" /> -->
+    <arg name="stereo_namespace"        value="/camera"/>
+    <arg name="frame_id"                default="base_footprint"/>
+    <arg name="left_image_topic"        value="$(arg stereo_namespace)/left/image_rect_color" />
+    <arg name="right_image_topic"       value="$(arg stereo_namespace)/right/image_rect_color" />
+    <arg name="left_camera_info_topic"  value="$(arg stereo_namespace)/left/camera_info" />
+    <arg name="right_camera_info_topic" value="$(arg stereo_namespace)/right/camera_info" />
+    <arg name="rviz" value="$(arg rviz)" />
+    <arg name="rtabmapviz" value="$(arg rtabmapviz)" />
+  </include>
+</launch>
